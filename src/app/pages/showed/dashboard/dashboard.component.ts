@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { map, defaultIfEmpty } from 'rxjs/operators';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Projeto } from '../../core/projeto.models';
 import { ProjetoService } from '../../core/projeto.service';
@@ -16,7 +17,7 @@ export interface Status {
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent implements OnInit {
-  projetos$: Observable<Projeto[]> | undefined;
+  projetos$: Observable<Projeto[]> = of([]); // Inicializa com um Observable de um array vazio
   nomeProjeto: string = '';
   descProjeto: string = '';
   statusSelecionado: Status = { name: '', key: '' };
@@ -35,7 +36,9 @@ export class DashboardComponent implements OnInit {
   }
 
   carregarProjetos() {
-    this.projetos$ = this.projetoService.getProjetos();
+    this.projetos$ = this.projetoService.getProjetos().pipe(
+      defaultIfEmpty([]) // Garante que sempre retorne um array
+    );
   }
 
   addProjeto() {
@@ -46,15 +49,18 @@ export class DashboardComponent implements OnInit {
     };
 
     this.projetoService.addProjeto(novoProjeto).subscribe(() => {
-      this.carregarProjetos(); // Atualiza a lista de projetos após a adição
-      this.resetForm(); // Limpa o formulário após a adição
+      this.carregarProjetos();
+      this.resetForm();
     });
   }
 
+  
   editProjeto(projeto: Projeto) {
+    console.log('Iniciando edição do projeto:', projeto);
+
     const ref = this.dialog.open(EditorComponent, {
       data: {
-        projeto: { ...projeto }, // Passa uma cópia do projeto para evitar modificar diretamente
+        projeto: { ...projeto },
         statusOptions: this.status
       },
       header: 'Editar Projeto',
@@ -63,18 +69,36 @@ export class DashboardComponent implements OnInit {
 
     ref.onClose.subscribe((updatedProjeto: Projeto) => {
       if (updatedProjeto) {
-        this.projetoService.updateProjeto(updatedProjeto).subscribe(() => {
-          this.carregarProjetos(); // Recarrega a lista de projetos para refletir as alterações
-        });
+        console.log('Projeto atualizado recebido do editor:', updatedProjeto);
+
+        this.projetoService.updateProjeto(updatedProjeto).subscribe(
+          response => {
+            console.log('Resposta do servidor após atualização:', response);
+
+            this.projetos$ = this.projetos$.pipe(
+              defaultIfEmpty([]),
+              map(projetos => {
+                console.log('Atualizando lista de projetos localmente.');
+                return projetos.map(p => p.id === response.id ? response : p);
+              })
+            );
+          },
+          error => {
+            console.error('Erro ao atualizar projeto:', error);
+          }
+        );
+      } else {
+        console.log('Edição do projeto cancelada pelo usuário.');
       }
     });
   }
+
 
   deleteProjeto(id: number) {
     console.log('Deletando projeto com ID:', id);
     if (confirm('Você tem certeza que deseja excluir este projeto?')) {
       this.projetoService.deleteProjeto(id).subscribe(() => {
-        this.carregarProjetos(); // Recarrega a lista de projetos após a exclusão
+        this.carregarProjetos();
       }, error => {
         console.error('Erro ao deletar o projeto:', error);
       });

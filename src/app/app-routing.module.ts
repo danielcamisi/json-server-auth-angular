@@ -9,8 +9,8 @@ import { AuthGuard } from './pages/core/guard.service';
 const routes: Routes = [
   {path: '', component: LayoutComponent,
       children:[
-        {path:'', redirectTo: 'login', pathMatch:'full'},
-        {path:'dashboard', component: DashboardComponent},
+        {path:'', redirectTo: 'register', pathMatch:'full'},
+        {path:'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
         {path:'login', component: LoginComponent},
         {path:'register', component: RegisterComponent},
       ]
