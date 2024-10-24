@@ -1,0 +1,20 @@
+<p-card class="card">
+    <form [formGroup]="loginForm" (ngSubmit)="login()">    
+    <div class="main-div">
+        <h1> Login </h1>
+    </div>
+    <div class="input">
+        <label>Email</label>
+        <input type="email" name="" placeholder="Email" formControlName="email" pInputText>
+        <small>Insira seu e-mail</small>
+    </div>
+    <div class="input">
+        <label>Senha</label>
+        <input type="password" name="" placeholder="Senha" formControlName="password" pInputText>
+        <small>Insira sua senha</small>
+    </div>
+    <div class="input">
+        <p-button type="Submit" [disabled]="loginForm.invalid">Logar</p-button>
+    </div>
+</form>
+</p-card>

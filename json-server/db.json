@@ -1,0 +1,32 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "email": "user@example.com",
+      "password": "123456"
+    },
+    {
+      "id": "c6b9",
+      "email": "testedaniel@email.com",
+      "password": "testesenha12345"
+    },
+    {
+      "id": "de95",
+      "email": "testedaneeeiel@email.com",
+      "password": "testesenha12345"
+    },
+    {
+      "id": "17b4",
+      "name": "Qualquernome",
+      "email": "qualqueremail@email.com",
+      "password": "qualquer123"
+    },
+    {
+      "id": "b66a",
+      "name": "nometeste",
+      "email": "emailteste@email.com",
+      "password": "issoae123"
+    }
+  ],
+  "projetos": []
+}

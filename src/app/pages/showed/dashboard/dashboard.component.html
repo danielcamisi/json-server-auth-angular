@@ -1,0 +1,62 @@
+<p-card>
+    <div class="div-main">
+    <div>
+        <h1> Gerendiador de Projetos </h1>
+    </div>
+    <div class="div-elements">
+         <input type="text " pInputText placeholder="Nome do projeto"  [(ngModel)]="nomeProjeto" >
+    </div>
+    <div class="div-elements">
+        <input type="text " pInputTextarea placeholder="Descrição do Projeto"  [(ngModel)]="descProjeto">
+    </div>
+    <div class="card flex justify-content-center">
+        <div class="flex flex-column gap-3">
+            <div *ngFor="let stats of status" class="field-checkbox">
+                <p-radioButton 
+                  [inputId]="stats.key" 
+                  name="stats" 
+                  [value]="stats" 
+                  [(ngModel)]="statusSelecionado" />
+                <label [for]="stats.key" class="ml-2">{{ stats.name }}</label>
+              </div>
+        </div>
+    </div>
+    <div class="div-elements">
+        <p-button (onClick)="addProjeto()">Criar Projeto</p-button>
+    </div>
+</div>
+</p-card>
+
+<p-card>
+  <div *ngIf="projetos$ | async as projetos">
+    <div class="projetos-table">
+      <h2>Projetos Criados</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let projeto of projetos">
+            <td>{{ projeto.id }}</td>
+            <td>{{ projeto.nome }}</td>
+            <td>{{ projeto.descprojeto }}</td>
+            <td>{{ projeto.Status.name }}</td>
+            <td>
+              <p-button label="Editar" (onClick)="editProjeto(projeto)"></p-button>
+              <p-button label="Excluir" (onClick)="deleteProjeto(projeto.id)" styleClass="p-button-danger"></p-button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div *ngIf="projetos.length === 0">
+        <p>Não há projetos disponíveis para visualização.</p>
+      </div>
+    </div>
+  </div>
+</p-card>

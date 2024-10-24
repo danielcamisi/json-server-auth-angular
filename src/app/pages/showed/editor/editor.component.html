@@ -1,0 +1,11 @@
+<div *ngIf="projeto">
+    <h3>Editar Projeto</h3>
+    <input type="text" (ngModel)="projeto.nome" placeholder="Nome do projeto" />
+    <textarea (ngModel)="projeto.descprojeto" placeholder="Descrição do Projeto"></textarea>
+    <div *ngFor="let stats of statusOptions" class="field-checkbox">
+      <p-radioButton [inputId]="stats.key" name="stats" [value]="stats" (ngModel)="projeto.Status"/>
+      <label [for]="stats.key">{{ stats.name }}</label>
+    </div>
+    <button (click)="salvar()">Salvar</button>
+    <button (click)="cancelar()">Cancelar</button>
+  </div>
