@@ -1,5 +1,4 @@
-import { Component, OnInit, ViewEncapsulation  } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { map, defaultIfEmpty } from 'rxjs/operators';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Projeto } from '../../core/projeto.models';
@@ -7,28 +6,15 @@ import { ProjetoService } from '../../core/projeto.service';
 import { EditorComponent } from '../editor/editor.component';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { ConfirmationService,MessageService, PrimeNGConfig } from 'primeng/api';
-
-
-export interface Status {
-  name: string;
-  key: string;
-}
+import { Status } from '../dashboard/dashboard.component';
+import { of, Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css'],
-  encapsulation: ViewEncapsulation.Emulated,
-  animations: [
-    trigger('fadeInOut', [
-      state('void', style({ opacity: 0 })),
-      transition(':enter, :leave', [
-        animate(500)
-      ])
-    ])
-  ]
+  selector: 'app-table',
+  templateUrl: './table.component.html',
+  styleUrl: './table.component.css'
 })
-export class DashboardComponent implements OnInit {
+export class TableComponent implements OnInit {
   projetos$: Observable<Projeto[]> = of([]); // Inicializa com um Observable de um array vazio
   nomeProjeto: string = '';
   descProjeto: string = '';
@@ -46,18 +32,18 @@ export class DashboardComponent implements OnInit {
     public dialog: DialogService,
     private confirmationService: ConfirmationService, 
     private primengConfig: PrimeNGConfig,
-    private messageService: MessageService
+    private messageService: MessageService) 
+  {
+    this.primengConfig.setTranslation({
+      accept: 'Sim',
+      reject: 'Não',
+        
+      });
+  }
 
-  ) 
-{
-  this.primengConfig.setTranslation({
-  accept: 'Sim',
-  reject: 'Não',
     
-  });
-}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.carregarProjetos();
   }
 
@@ -67,30 +53,26 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  addProjeto() {
-    if(!this.nomeProjeto || !this.descProjeto || !this.statusSelecionado.key){
-      this.messageService.add({
-        severity:'error',
-        summary: 'Erro',                                         //verificação na criação do projeto
-        detail: 'Todos os campos devem estar preenchidos',
-        life: 3000
-      });
-      return;
-    }
 
-    const novoProjeto: Omit<Projeto, 'id'> = {
-      nome: this.nomeProjeto,
-      descprojeto: this.descProjeto,                                //atribuição de valores pelo input
-      Status: this.statusSelecionado,
-    };
-
-    this.projetoService.addProjeto(novoProjeto).subscribe(() => {
-      this.carregarProjetos();                                                //atribuindo valores ao banco de dados
-      this.resetForm();
+  deleteProjeto(event: Event, id: number) {
+    this.confirmationService.confirm({
+      target: event.target || undefined,
+      message: 'Você tem certeza que deseja excluir este projeto?',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.projetoService.deleteProjeto(id).subscribe(() => {
+          this.carregarProjetos();
+          this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Projeto deletado com sucesso', life: 3000 });
+        }, error => {
+          console.error('Erro ao deletar o projeto:', error);
+        });
+      },
+      reject:() => {
+        this.messageService.add({severity: 'info', summary: 'Cancelado', detail: 'Nenhuma alteração foi concluída', life: 3000});
+      }
     });
   }
 
-  
   editProjeto(projeto: Projeto) {
     console.log('Iniciando edição do projeto:', projeto);
 
@@ -129,25 +111,6 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-
-  deleteProjeto(event: Event, id: number) {
-    this.confirmationService.confirm({
-      target: event.target || undefined,
-      message: 'Você tem certeza que deseja excluir este projeto?',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        this.projetoService.deleteProjeto(id).subscribe(() => {
-          this.carregarProjetos();
-          this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Projeto deletado com sucesso', life: 3000 });
-        }, error => {
-          console.error('Erro ao deletar o projeto:', error);
-        });
-      },
-      reject:() => {
-        this.messageService.add({severity: 'info', summary: 'Cancelado', detail: 'Nenhuma alteração foi concluída', life: 3000});
-      }
-    });
-  }
 
   private resetForm() {
     this.nomeProjeto = '';

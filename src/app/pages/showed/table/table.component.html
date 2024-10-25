@@ -1,0 +1,33 @@
+<div class="view-projects" @fadeInOut>
+    <p-card >
+      <div class="table-inside" *ngIf="projetos$ | async as projetos">
+          <h2>Projetos Criados</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Status</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let projeto of projetos">
+                <td>{{ projeto.id }}</td>
+                <td>{{ projeto.nome }}</td>
+                <td>{{ projeto.descprojeto }}</td>
+                <td>{{ projeto.Status.name }}</td>
+                <td>
+                  <p-button class="button-table" label="Editar" (onClick)="editProjeto(projeto)"></p-button>
+                  <p-button class="button-table" label="Excluir" (onClick)="deleteProjeto($event, projeto.id)" styleClass="p-button-danger"></p-button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div *ngIf="projetos.length === 0">
+            <p>Não há projetos disponíveis para visualização.</p>
+          </div>
+        </div>
+    </p-card>
+    </div>

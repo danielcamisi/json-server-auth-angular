@@ -1,4 +1,33 @@
-<p-menubar [model]="itens" />
+<p-menubar [model]="itens">
+    <ng-template pTemplate="start">
+      <img src="../../../../assets/imgs/logoRapidev.jpg" style="height: 40px; margin-right: 40px;" alt="brand logo"/>
+    </ng-template>
+    <ng-template pTemplate="end">
+        <p-button label="Sair" (click)="confirmLogout($event)"></p-button>
+      </ng-template>
+  </p-menubar>
+
+  <p-confirmPopup></p-confirmPopup>
+  <p-messages></p-messages>
+  
 <main class="main-div">
+  <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "cube-transition" [fullScreen] = "true"><p style="color: white" > Carregando... </p></ngx-spinner>
     <router-outlet></router-outlet>
     </main>
+
+    <p-card class="all-footer">
+      <div class="footer">
+        <p>Copyright <a href="https://github.com/danielcamisi">Daniel C. Silva</a></p>
+        <a href="https://github.com/danielcamisi">
+        <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" style="height: 36px; margin-right: 36px;" alt="brand logo">
+      </a>
+      <a href="https://x.com/danzzvlr">
+        <img src="https://img.freepik.com/vetores-premium/novo-vetor-do-logotipo-do-twitter-x_768467-92.jpg?semt=ais_hybrid" style="height: 36px; margin-right: 36px;" alt="brand logo">
+      </a>
+      <a href="https://www.linkedin.com/in/daniel-silva-647860188/">
+        <img src="https://cdn-icons-png.flaticon.com/512/61/61109.png" style="height: 36px; margin-right: 36px;" alt="brand logo">
+      </a>
+      </div>
+  </p-card>
+  
+

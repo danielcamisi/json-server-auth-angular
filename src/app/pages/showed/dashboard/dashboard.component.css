@@ -3,7 +3,20 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: auto;
+    max-width: min-content;
+    height: 100%;
+
 }
 .div-elements{
     padding:1em;
 }
+
+.create-projects{
+    margin-left: 45em;
+    margin-right: 45em;
+    margin-bottom: 6em;
+    margin-top: 6em;
+
+}
+

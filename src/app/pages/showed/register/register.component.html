@@ -1,4 +1,5 @@
-<p-card class="card">
+<p-card class="card" @fadeInOut>
+    <p-messages></p-messages>
     <form [formGroup]="signUpForm" (ngSubmit)="signUp()">    
     <div class="main-div">
         <h1> Registrar </h1>

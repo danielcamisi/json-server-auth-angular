@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Projeto } from './projeto.models';
+import { map, switchMap  } from 'rxjs/operators';
 
 
 @Injectable({
@@ -18,9 +19,17 @@ export class ProjetoService {
     return this.http.get<Projeto[]>(this.apiUrl);
   }
 
-  // Método POST para criar um novo projeto
+  // Método POST para criar um novo projeto, e mantendo a sequência de ID's
+
   addProjeto(projeto: Omit<Projeto, 'id'>): Observable<Projeto> {
-    return this.http.post<Projeto>(this.apiUrl, projeto);
+    return this.getProjetos().pipe(
+      map(projetos => {
+        const maxId = projetos.length > 0 ? Math.max(...projetos.map(p => p.id)) : 0;
+        const novoProjeto: Projeto = { ...projeto, id: maxId + 1 };
+        return novoProjeto;
+      }),
+      switchMap(novoProjeto => this.http.post<Projeto>(this.apiUrl, novoProjeto))
+    );
   }
   // Método DELETE para remover um projeto pelo ID
   deleteProjeto(id: number): Observable<void> {

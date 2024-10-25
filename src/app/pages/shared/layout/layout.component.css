@@ -1,0 +1,22 @@
+.main-div{
+    flex-direction: row;
+    align-items: space-between;
+    justify-content: center;
+}
+
+.icons{
+    padding:2em;
+}
+.footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 20px;
+   
+}
+.all-footer{
+    position: absolute;
+    bottom:0;
+    left: 0;
+    right: 0;
+}

@@ -1,7 +1,9 @@
 .card{
     display: flex;
     flex-direction: column;
-    padding: 9em;
+    max-width: min-content;
+    padding: 5em;
+    margin:auto;
 }
 .main-div{
     display: flex;

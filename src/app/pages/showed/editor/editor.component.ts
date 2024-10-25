@@ -6,7 +6,7 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 @Component({
   selector: 'app-editor',
   templateUrl: './editor.component.html',
-  styleUrl: './editor.component.css',
+  styleUrls: ['./editor.component.css']
 })
 
 export class EditorComponent {

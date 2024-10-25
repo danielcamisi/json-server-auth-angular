@@ -5,12 +5,14 @@ import { DashboardComponent } from './pages/showed/dashboard/dashboard.component
 import { LoginComponent } from './pages/showed/login/login.component';
 import { RegisterComponent } from './pages/showed/register/register.component';
 import { AuthGuard } from './pages/core/guard.service';
+import { TableComponent } from './pages/showed/table/table.component';
 
 const routes: Routes = [
   {path: '', component: LayoutComponent,
       children:[
-        {path:'', redirectTo: 'register', pathMatch:'full'},
+        {path:'', redirectTo: 'login', pathMatch:'full'},
         {path:'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+        {path:'projects', component: TableComponent, canActivate: [AuthGuard] },
         {path:'login', component: LoginComponent},
         {path:'register', component: RegisterComponent},
       ]
