@@ -75,6 +75,13 @@ export class DashboardComponent implements OnInit {
         detail: 'Todos os campos devem estar preenchidos',
         life: 3000
       });
+    } else {
+      this.messageService.add({
+        severity:'success',
+        summary: 'Sucesso',
+        detail: 'Projeto criado com sucesso',
+        life: 2500
+      });
       return;
     }
 
@@ -87,65 +94,6 @@ export class DashboardComponent implements OnInit {
     this.projetoService.addProjeto(novoProjeto).subscribe(() => {
       this.carregarProjetos();                                                //atribuindo valores ao banco de dados
       this.resetForm();
-    });
-  }
-
-  
-  editProjeto(projeto: Projeto) {
-    console.log('Iniciando edição do projeto:', projeto);
-
-    const ref = this.dialog.open(EditorComponent, {
-      data: {
-        projeto: { ...projeto },
-        statusOptions: this.status
-      },
-      header: 'Editar Projeto',
-      width: '50%'
-    });
-
-    ref.onClose.subscribe((updatedProjeto: Projeto) => {
-      if (updatedProjeto) {
-        console.log('Projeto atualizado recebido do editor:', updatedProjeto);
-
-        this.projetoService.updateProjeto(updatedProjeto).subscribe(
-          response => {
-            console.log('Resposta do servidor após atualização:', response);
-
-            this.projetos$ = this.projetos$.pipe(
-              defaultIfEmpty([]),
-              map(projetos => {
-                console.log('Atualizando lista de projetos localmente.');
-                return projetos.map(p => p.id === response.id ? response : p);
-              })
-            );
-          },
-          error => {
-            console.error('Erro ao atualizar projeto:', error);
-          }
-        );
-      } else {
-        console.log('Edição do projeto cancelada pelo usuário.');
-      }
-    });
-  }
-
-
-  deleteProjeto(event: Event, id: number) {
-    this.confirmationService.confirm({
-      target: event.target || undefined,
-      message: 'Você tem certeza que deseja excluir este projeto?',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        this.projetoService.deleteProjeto(id).subscribe(() => {
-          this.carregarProjetos();
-          this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Projeto deletado com sucesso', life: 3000 });
-        }, error => {
-          console.error('Erro ao deletar o projeto:', error);
-        });
-      },
-      reject:() => {
-        this.messageService.add({severity: 'info', summary: 'Cancelado', detail: 'Nenhuma alteração foi concluída', life: 3000});
-      }
     });
   }
 
