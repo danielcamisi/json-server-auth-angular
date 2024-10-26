@@ -41,7 +41,7 @@ export class LayoutComponent implements OnInit {
         command:() => this.Spinnerhow()
       },
       {
-        label: 'Logar',
+        label: 'Entrar',
         icon: 'pi pi-star',
         routerLink: 'login',
         command:() => this.Spinnerhow()

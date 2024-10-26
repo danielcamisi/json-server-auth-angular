@@ -1,8 +1,10 @@
 .main-div{
-    flex-direction: row;
-    align-items: space-between;
-    justify-content: center;
-}
+    display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 63px - 100px);
+  justify-content: center;
+  align-items: center;
+} 
 
 .icons{
     padding:2em;

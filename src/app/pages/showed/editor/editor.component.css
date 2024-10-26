@@ -1,0 +1,20 @@
+.div-main{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.div-left{
+    display: flex;
+    flex-direction: column;
+}
+.div-right{
+    flex-direction: column;
+}
+.div-without{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 3em;
+
+}
