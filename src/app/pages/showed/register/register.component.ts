@@ -59,7 +59,7 @@ export class RegisterComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Erro',
-          detail: 'Algo aconteceu de erro',
+          detail: 'Houve algum erro',
           life: 5000
         });
       });
