@@ -4,7 +4,6 @@ import { map, defaultIfEmpty } from 'rxjs/operators';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Projeto } from '../../core/projeto.models';
 import { ProjetoService } from '../../core/projeto.service';
-import { EditorComponent } from '../editor/editor.component';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { ConfirmationService,MessageService, PrimeNGConfig } from 'primeng/api';
 
