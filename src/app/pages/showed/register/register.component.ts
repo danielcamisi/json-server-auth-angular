@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit {
 
   signUp() {
     if (this.signUpForm.valid) { // Verificar validade do formulário
-      this.http.post<any>(`${process.env["API_URL"]}/users`, this.signUpForm.value)
+      this.http.post<any>("http://localhost:3000/users", this.signUpForm.value)
       .subscribe(_res => {
         this.messageService.add({
           severity: 'success',
