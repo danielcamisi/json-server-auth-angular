@@ -3,6 +3,7 @@
     flex-direction: column;
     max-width: min-content;
     margin: auto;
+    overflow-y: auto;
     align-items: center
 }
 .main-div{

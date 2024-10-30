@@ -12,7 +12,15 @@ import { of, Observable } from 'rxjs';
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
-  styleUrl: './table.component.css'
+  styleUrls: ['./table.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      state('void', style({ opacity: 0 })),
+      transition(':enter, :leave', [
+        animate(300)
+      ]),
+    ])
+  ]
 })
 export class TableComponent implements OnInit {
   projetos$: Observable<Projeto[]> = of([]); // Inicializa com um Observable de um array vazio

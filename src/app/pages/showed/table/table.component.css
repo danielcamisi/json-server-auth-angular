@@ -1,5 +1,6 @@
 .view-projects{
     padding-top: 4em;
+    max-width: auto;
 }
 th, td {
     border-bottom: 1px solid #ddd;
@@ -16,4 +17,7 @@ th, td {
     width: 100%;
     justify-content: center;
     flex-direction: column;
+    max-height: 45em;
+    overflow-y: auto;
+    padding: 1rem;
 }

@@ -16,6 +16,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class LayoutComponent implements OnInit {
   itens: MenuItem[] | undefined;
+  links: MenuItem[] | undefined;
 
   constructor(private authService: AuthService, 
      private router: Router, 
@@ -27,9 +28,16 @@ export class LayoutComponent implements OnInit {
   {}
 
   ngOnInit() {
+    this.links = [
+      {
+        label: 'Muito obrigado pelo acesso',         //a utilização de variável aplicada no component p-menubar para exibição e configuração de botões
+      }
+    ]
+    
+    
     this.itens = [
       {
-        label: 'Gerenciador de Projetos',
+        label: 'Gerenciador de Projetos',             //estes botões configurados já possuem 2 funcionalidades cada um. executar o npxSpinner e alterar a rota para a rota declarada
         icon: 'pi pi-home',
         routerLink: 'dashboard',
         command:() => this.Spinnerhow()
@@ -55,16 +63,15 @@ export class LayoutComponent implements OnInit {
     ];
   
     this.primengConfig.setTranslation({
-      accept: 'Sim',
+      accept: 'Sim',                                 //configuração de tradução do popup de confirmação presente nos botões e na hora de POST,GET ou DELETE no backend
       reject: 'Não'
     });
   }
-
   confirmLogout(event: Event) {
     this.confirmationService.confirm({
       target: event.target || undefined, // Posiciona o popup junto ao botão
       message: 'Tem certeza de que deseja sair?',
-      icon: 'pi pi-exclamation-triangle',
+      icon: 'pi pi-exclamation-triangle',                                       //exibe o popup e após clicar no botão "SAIR"
       accept: () => {
         this.logout(); // Executa o logout ao aceitar
       },
@@ -81,13 +88,13 @@ export class LayoutComponent implements OnInit {
 
   Spinnerhow(){
     this.spinner.show();
-    setTimeout(()=>{
+    setTimeout(()=>{               //exibição da tela de carregamento e tempo de duração:
       this.spinner.hide();
     }, 3000)
   }
   
-  logout() {
-    this.authService.logout(); // Chama o serviço de logout
+  logout() {   
+    this.authService.logout(); // Chama o serviço de logout responsável por deletar o token atual presente no localStorage no navegador
     this.router.navigate(['/login']); // Redireciona para a página de login
   }
 }

@@ -11,7 +11,7 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./login.component.css'],
   animations: [
     trigger('fadeInOut', [
-      state('void', style({ opacity: 0 })),
+      state('void', style({ opacity: 0 })),                  //configurações de animção fadeInOut
       transition(':enter, :leave', [
         animate(500)
       ])
@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formbuilder: FormBuilder,
-    private authService: AuthService, // Injete o serviço de autenticação
+    private authService: AuthService,       //serviço injetados direto no constructor para não utilizar o @inject OBS: ocorre erro ao utilizar @Inject com 'return's no código
     private router: Router,
     private messageService: MessageService,
   ) 
@@ -40,7 +40,7 @@ ngOnInit(): void {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
 
-      this.authService.login(email, password).subscribe(
+      this.authService.login(email, password).subscribe(  //aqui o methodo login efetua uma verificação no db.json através do serviço authService, para encontrar o usuário já presente no db
         response => {;
           this.messageService.add({
             severity:'success',
