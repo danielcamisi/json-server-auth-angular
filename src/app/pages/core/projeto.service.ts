@@ -10,7 +10,7 @@ import { map, switchMap  } from 'rxjs/operators';
 })
 export class ProjetoService {
 
-  private apiUrl = 'http://localhost:3000/projetos';
+  private apiUrl = `${process.env["API_URL"]}/projetos`;
 
   constructor(private http: HttpClient) { }
 
