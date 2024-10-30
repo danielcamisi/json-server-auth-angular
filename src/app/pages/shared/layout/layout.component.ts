@@ -11,7 +11,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.scss'],
+  styleUrls: ['./layout.component.css'],
   providers: [MessageService, MessageService]
 })
 export class LayoutComponent implements OnInit {
