@@ -7,7 +7,7 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = `${process.env["API_URL"]}`;
+  private apiUrl = 'http://localhost:3000';
   private token: string | null = null;
 
   constructor(private http: HttpClient) {}

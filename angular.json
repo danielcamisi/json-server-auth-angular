@@ -21,14 +21,11 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-builders/custom-webpack:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/jwt-manager-project",
             "index": "src/index.html",
-            "main": "src/main.ts",
-            "customWebpackConfig": {
-              "path": "src/custom-webpack.config.ts"
-            },
+            "browser": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -70,7 +67,7 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular-builders/custom-webpack:dev-server",
+          "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
               "buildTarget": "jwt-manager-project:build:production"
