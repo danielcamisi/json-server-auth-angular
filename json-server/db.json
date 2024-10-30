@@ -1,0 +1,146 @@
+{
+  "users": [
+    {
+      "email": "emaildiff@email.com",
+      "password": "$2a$10$B3JT74p5f7qGr.1OsUzc8OvBU/66avhQwDJ4EGUt5Z/O7SPIIoSWW",
+      "name": "teste",
+      "id": "PPQmcUl"
+    },
+    {
+      "email": "exemplo@email.com",
+      "password": "$2a$10$84OwnTbzbUg8Qa0FEZO6NeKI/MEnFVaM4I9oUG/XmLfPBqZW8Ykoq",
+      "id": "YrKwirz"
+    },
+    {
+      "email": "tentando@email.com",
+      "password": "$2a$10$NIogS3JcTNWryQTSZKSGtedOzhz6G0s0YQ9/WWxiP4ynmrKren.xW",
+      "name": "nome exemplo",
+      "id": "c1zA5W9"
+    },
+    {
+      "email": "daniel@email.com",
+      "password": "$2a$10$j9LixChuZ8ZYWwQhc.1fU./76xDUlArwOQQQABoW2fOrZNQmjEvM2",
+      "name": "Daniel",
+      "id": "ycKy4Ja"
+    },
+    {
+      "email": "teste@email.com",
+      "password": "$2a$10$GP/v6aQ7NQ6AclcCx6q6Q.hzywLL3NyJ0Hwxbk04qVqZLwDXf5UZi",
+      "name": "Teste",
+      "id": "38rhF0v"
+    },
+    {
+      "email": "camillo@email.com",
+      "password": "$2a$10$u4vpXNHm36iGBewjSduNEOAlkZVEH3XOdlDGMVUGyOe7Q0Mw.NNR.",
+      "name": "daniel",
+      "id": "MuiBIJS"
+    },
+    {
+      "email": "test1e@email.com",
+      "password": "$2a$10$HHoZ6f7CmtdH/g31RUNkn.Y/2WKLY5Q7feJWuamzctGD0JtByGi7C",
+      "name": "teste",
+      "id": "4Kvz8au"
+    },
+    {
+      "email": "daadadad@email.com",
+      "password": "$2a$10$B5/Uw8/EYkcHu7rW276jiOVTR0W.SPgBrcXIk1yz5dkhdSxVVIIhi",
+      "name": "daadadad",
+      "id": "C2Lt3KU"
+    },
+    {
+      "email": "fofinha@email.com",
+      "password": "$2a$10$.hOcMYEiRxKq.QANqXYqmOWQSvZCski3TiLjGiNej9ddGR4/V4LuG",
+      "name": "fofinha",
+      "id": "UiUtbSd"
+    },
+    {
+      "email": "emailteste12356@email.com",
+      "password": "$2a$10$2vtL2qpBCd/w9i/EVDx0k.ck5f6/bCSZi3w7wcHubWhHe5iYJaTE2",
+      "name": "dsfsfsfessfe",
+      "password1": "",
+      "id": "R49jHHs"
+    },
+    {
+      "email": "senhateste@email.com",
+      "password": "$2a$10$vBVn8.XQGoZLkk8rb0dNKu6Mar36TjzH0ptSya3GM2mlCpzPbmbk2",
+      "name": "teste senha estranha",
+      "password1": "",
+      "id": "6w8ecuj"
+    },
+    {
+      "email": "emailtestando@email.com",
+      "password": "$2a$10$ljbImlFBsKPXSLurwe/EAOmERlqLj3j1gSGgkoBNlTsTxfUTdCTfa",
+      "name": "dwadawdad",
+      "password1": "123456",
+      "id": "1U1zk1_"
+    },
+    {
+      "email": "danielemail@email.com",
+      "password": "$2a$10$fs5266Fl11rI/0Vs2/ctQ.gZQ/lOlrRKRARXIEfwaHyIBs/S9C0A6",
+      "name": "daniel silva",
+      "password1": "123456",
+      "id": "qeWyjC4"
+    },
+    {
+      "email": "danielcamillo@email.com",
+      "password": "$2a$10$Wccjvin03j4Lfx8dok8qouZzHdZY3LUhrstk/qVPs4wrStN/yQiGW",
+      "name": "testando",
+      "password1": "123456",
+      "id": "r0-6DX1"
+    },
+    {
+      "email": "emailteste@email.com",
+      "password": "$2a$10$QWOi3zhIWJ/tESTBjuzz9Ojh8Hj7q0p6/sgOO68jgUj20pI1F6Tce",
+      "name": "nome teste",
+      "password1": "123456",
+      "id": "PWroZOu"
+    }
+  ],
+  "projetos": [
+    {
+      "nome": "dwadwadawdwdwaa",
+      "descprojeto": "dwadwaawddawawdawdawdawdawddaw",
+      "Status": {
+        "name": "Em Andamento",
+        "key": "E"
+      },
+      "id": 2
+    },
+    {
+      "nome": "criando projeto",
+      "descprojeto": "descrição teste",
+      "Status": {
+        "name": "Em Andamento",
+        "key": "E"
+      },
+      "id": 4
+    },
+    {
+      "nome": "dwadwada",
+      "descprojeto": "dawdawdawdaw",
+      "Status": {
+        "name": "Em Andamento",
+        "key": "E"
+      },
+      "id": 5
+    },
+    {
+      "nome": "dwadawsdwa",
+      "descprojeto": "dwasdwasdwa",
+      "Status": {
+        "name": "Concluído",
+        "key": "C"
+      },
+      "id": 6
+    },
+    {
+      "nome": "dwadwa",
+      "descprojeto": "dwadawwda",
+      "Status": {
+        "name": "Inativo",
+        "key": "I"
+      },
+      "id": 8
+    }
+  ]
+}
