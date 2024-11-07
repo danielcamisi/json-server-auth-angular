@@ -1,4 +1,4 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';            //core
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { LayoutComponent } from './pages/shared/layout/layout.component';                   
 import { LoginComponent } from './pages/showed/login/login.component';                    
 import { RegisterComponent } from './pages/showed/register/register.component';
-import { DashboardComponent } from './pages/showed/dashboard/dashboard.component';
+import { DashboardComponent } from './pages/showed/dashboard/dashboard.component';      //Import Components
 import { EditorComponent } from './pages/showed/editor/editor.component';
 import { TableComponent } from './pages/showed/table/table.component';
 import { AuthInterceptor } from './pages/core/interceptor.service';
@@ -17,7 +17,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ButtonModule } from 'primeng/button';
 import { RadioButtonModule } from 'primeng/radiobutton';
-import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';          //Import Primeng
 import { DialogModule } from 'primeng/dialog';
 import { AccordionModule } from 'primeng/accordion';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
@@ -28,12 +28,13 @@ import { MessagesModule } from 'primeng/messages';
 import { MessageService } from 'primeng/api';
 import { TableModule } from 'primeng/table';
 
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';                                                  //import fomulários
 import { ReactiveFormsModule } from '@angular/forms'; 
 import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
-import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgxSpinnerModule } from 'ngx-spinner';       //tela de carregamento
 import { NgxSpinnerService } from 'ngx-spinner';
 
 
@@ -69,6 +70,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
     MessagesModule,
     NgxSpinnerModule,
     TableModule,
+    
   ],
   providers: [DialogService, ConfirmationService, MessageService, NgxSpinnerService, provideHttpClient(withInterceptorsFromDi()),
     {

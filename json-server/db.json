@@ -94,6 +94,13 @@
       "name": "nome teste",
       "password1": "123456",
       "id": "PWroZOu"
+    },
+    {
+      "email": "valerio@email.com",
+      "password": "$2a$10$YocWyKYB18z/x989szEA3.KDC/XLZinUhREyJ4a1pnmW5nmz16yee",
+      "name": "valério",
+      "password1": "123456",
+      "id": "0e5sgs_"
     }
   ],
   "projetos": [
@@ -116,7 +123,7 @@
       "id": 2
     },
     {
-      "nome": "dddddddddd",
+      "nome": "teste valerio",
       "descprojeto": "aaaaaaa",
       "Status": {
         "name": "Em Andamento",
@@ -177,6 +184,15 @@
         "key": "F"
       },
       "id": 10
+    },
+    {
+      "nome": "projeto teste11",
+      "descprojeto": "teste teste teste",
+      "Status": {
+        "name": "Finalizado",
+        "key": "F"
+      },
+      "id": 11
     }
   ]
 }
