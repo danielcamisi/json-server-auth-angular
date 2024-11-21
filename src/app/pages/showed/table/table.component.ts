@@ -5,9 +5,9 @@ import { Projeto } from '../../core/projeto.models';
 import { ProjetoService } from '../../core/projeto.service';
 import { EditorComponent } from '../editor/editor.component';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { ConfirmationService,MessageService, PrimeNGConfig } from 'primeng/api';
-import { Status } from '../dashboard/dashboard.component';
+import { ConfirmationService, MessageService, PrimeNGConfig } from 'primeng/api';
 import { of, Observable } from 'rxjs';
+import { Status } from '../dashboard/dashboard.component';
 
 @Component({
   selector: 'app-table',
@@ -23,16 +23,15 @@ import { of, Observable } from 'rxjs';
   ]
 })
 export class TableComponent implements OnInit {
-  projetos$: Observable<Projeto[]> = of([]); // Inicializa com um Observable de um array vazio
-  nomeProjeto: string = '';
-  descProjeto: string = '';
-  statusSelecionado: Status = { name: '', key: '' };
+  projetos$: Observable<Projeto[]> = of([]); 
+  sourceProducts: Projeto[] = [];
+  targetProducts: Projeto[] = [];
+  projetoProc: Projeto[] = [];
 
   status: Status[] = [
-    { name: 'Concluído', key: 'C' },
-    { name: 'Em Andamento', key: 'E' },
-    { name: 'Inativo', key: 'I' },
-    { name: 'Finalizado', key: 'F' }
+    { name: 'Disponível', key: 'C' },
+    { name: 'Em processo', key: 'E' },
+    { name: 'Concluído', key: 'F' }           
   ];
 
   constructor(
@@ -45,22 +44,64 @@ export class TableComponent implements OnInit {
     this.primengConfig.setTranslation({
       accept: 'Sim',
       reject: 'Não',
-        
-      });
+    });
   }
-
-    
 
   ngOnInit(): void {
     this.carregarProjetos();
   }
 
   carregarProjetos() {
-    this.projetos$ = this.projetoService.getProjetos().pipe(
-      defaultIfEmpty([]) // Garante que sempre retorne um array
-    );
+    this.projetoService.getProjetos().subscribe((projetos: Projeto[]) => {
+      this.sourceProducts = projetos.filter(projeto => projeto.Status.key === 'C'); // Disponível
+      this.projetoProc = projetos.filter(projeto => projeto.Status.key === 'E'); // Em Processo
+      this.targetProducts = projetos.filter(projeto => projeto.Status.key === 'F'); // Concluído
+    });
   }
 
+  onMoveToTarget(event: any, target: string) {
+    event.items.forEach((item: Projeto) => {
+      if (target === 'process') {
+        item.Status = { name: 'Em Processo', key: 'E' };
+        this.projetoProc.push(item);
+      } else if (target === 'finalized') {
+        item.Status = { name: 'Concluído', key: 'F' };
+        this.targetProducts.push(item);
+      }
+      this.updateProjetoStatus(item);
+    });
+
+    this.carregarProjetos();
+  }
+  
+  onMoveToSource(event: any, source: string) {
+    event.items.forEach((item: Projeto) => {
+      if (source === 'available') {
+        item.Status = { name: 'Disponível', key: 'C' }; // Corrija o key para 'C'
+        this.sourceProducts.push(item);
+        this.projetoProc = this.projetoProc.filter(projeto => projeto.id !== item.id);
+        this.targetProducts = this.targetProducts.filter(projeto => projeto.id !== item.id);
+      } else if (source === 'process') {
+        item.Status = { name: 'Em Processo', key: 'E' };
+        this.projetoProc.push(item);
+        this.targetProducts = this.targetProducts.filter(projeto => projeto.id !== item.id);
+      }
+      this.updateProjetoStatus(item);
+    });
+  
+    this.carregarProjetos(); // Recarregar para garantir atualização visual
+  }
+
+  updateProjetoStatus(projeto: Projeto) {
+    this.projetoService.updateProjeto(projeto).subscribe(
+      () => {
+        this.messageService.add({ severity: 'success', summary: 'Status Atualizado', detail: `O status do projeto "${projeto.nome}" foi atualizado.`, life: 3000 });
+      },
+      error => {
+        console.error('Erro ao atualizar o status do projeto:', error);
+      }
+    );
+  }
 
   deleteProjeto(event: Event, id: number) {
     this.confirmationService.confirm({
@@ -69,7 +110,11 @@ export class TableComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.projetoService.deleteProjeto(id).subscribe(() => {
-          this.carregarProjetos();
+          // Remover o projeto da lista localmente
+          this.sourceProducts = this.sourceProducts.filter(projeto => projeto.id !== id);
+          this.projetoProc = this.projetoProc.filter(projeto => projeto.id !== id);
+          this.targetProducts = this.targetProducts.filter(projeto => projeto.id !== id);
+          
           this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Projeto deletado com sucesso', life: 3000 });
         }, error => {
           console.error('Erro ao deletar o projeto:', error);
@@ -80,49 +125,24 @@ export class TableComponent implements OnInit {
       }
     });
   }
+  
 
-  editProjeto(projeto: Projeto) {
-    console.log('Iniciando edição do projeto:', projeto);
-
-    const ref = this.dialog.open(EditorComponent, {
-      data: {
-        projeto: { ...projeto },
-        statusOptions: this.status
-      },
-      header: 'Editar Projeto',
-      width: '50%'
+  editProjeto() {
+    this.projetoService.getProjetos().subscribe(projetos => {
+      const ref = this.dialog.open(EditorComponent, {
+        data: {
+          projetoList: projetos, // Passe a lista completa de projetos
+        },
+        header: 'Gerenciar Projetos',
+        width: '70%'
+      });
+  
+      ref.onClose.subscribe((updatedProjetoList: Projeto[]) => {
+        if (updatedProjetoList) {
+          // Atualize suas listas locais conforme necessário
+          this.carregarProjetos();
+        }
+      });
     });
-
-    ref.onClose.subscribe((updatedProjeto: Projeto) => {
-      if (updatedProjeto) {
-        console.log('Projeto atualizado recebido do editor:', updatedProjeto);
-
-        this.projetoService.updateProjeto(updatedProjeto).subscribe(
-          response => {
-            console.log('Resposta do servidor após atualização:', response);
-
-            this.projetos$ = this.projetos$.pipe(
-              defaultIfEmpty([]),
-              map(projetos => {
-                console.log('Atualizando lista de projetos localmente.');
-                return projetos.map(p => p.id === response.id ? response : p);
-              })
-            );
-          },
-          error => {
-            console.error('Erro ao atualizar projeto:', error);
-          }
-        );
-      } else {
-        console.log('Edição do projeto cancelada pelo usuário.');
-      }
-    });
-  }
-
-
-  private resetForm() {
-    this.nomeProjeto = '';
-    this.descProjeto = '';
-    this.statusSelecionado = { name: '', key: '' };
   }
 }

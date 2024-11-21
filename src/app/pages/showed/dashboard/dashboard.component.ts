@@ -6,6 +6,7 @@ import { Projeto } from '../../core/projeto.models';
 import { ProjetoService } from '../../core/projeto.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MessageService, PrimeNGConfig } from 'primeng/api';
+import { EditorComponent } from '../editor/editor.component';
 
 
 export interface Status {
@@ -34,10 +35,9 @@ export class DashboardComponent implements OnInit {
   statusSelecionado: Status = { name: '', key: '' };
 
   status: Status[] = [
-    { name: 'Concluído', key: 'C' },
-    { name: 'Em Andamento', key: 'E' },
-    { name: 'Inativo', key: 'I' },
-    { name: 'Finalizado', key: 'F' }           
+    { name: 'Disponível', key: 'C' },
+    { name: 'Em processo', key: 'E' },
+    { name: 'Concluído', key: 'F' }           
   ];
 
   constructor(
@@ -65,11 +65,12 @@ export class DashboardComponent implements OnInit {
     );
   }
 
+
   addProjeto() {
-    if(!this.nomeProjeto || !this.descProjeto || !this.statusSelecionado.key){          // Método para adicionar um novo projeto
+    if(!this.nomeProjeto || !this.descProjeto || !this.statusSelecionado.key) {
       this.messageService.add({
         severity:'error',
-        summary: 'Erro',                                         //Verifica se todos os campos do formulário estão preenchidos
+        summary: 'Erro',
         detail: 'Todos os campos devem estar preenchidos',
         life: 3000
       });
@@ -81,18 +82,17 @@ export class DashboardComponent implements OnInit {
         detail: 'Projeto criado com sucesso',
         life: 2500
       });
-      
     }
-
+  
     const novoProjeto: Omit<Projeto, 'id'> = {
-      nome: this.nomeProjeto,                                        // Cria um objeto de projeto novo, omitindo a propriedade 'id'
-      descprojeto: this.descProjeto,                                //atribuição de valores pelo input
+      nome: this.nomeProjeto,
+      descprojeto: this.descProjeto,
       Status: this.statusSelecionado,
     };
-
+  
     this.projetoService.addProjeto(novoProjeto).subscribe(() => {
-      this.carregarProjetos();                                                //atribuindo valores ao banco de dados
-      this.resetForm();                                                       /// Adiciona o novo projeto através do serviço e recarrega a lista de projetos
+      this.carregarProjetos();  // Recarrega projetos após adicionar
+      this.resetForm();
     });
   }
 
@@ -100,5 +100,9 @@ export class DashboardComponent implements OnInit {
     this.nomeProjeto = '';
     this.descProjeto = '';
     this.statusSelecionado = { name: '', key: '' };
+  }
+
+  openDialog(){
+    this.dialog.open(EditorComponent, {})
   }
 }

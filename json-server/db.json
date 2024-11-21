@@ -98,85 +98,22 @@
   ],
   "projetos": [
     {
-      "nome": "dwadwad",
-      "descprojeto": "dwadwada",
+      "nome": "wwwwwww",
+      "descprojeto": "aaaaaa",
       "Status": {
-        "name": "Em Andamento",
+        "name": "Em Processo",
         "key": "E"
       },
-      "id": 1
+      "id": 3
     },
     {
-      "nome": "ddddddddddddddd",
-      "descprojeto": "aaaaaaaaaa",
+      "nome": "wwww",
+      "descprojeto": "hhhhhhhh",
       "Status": {
-        "name": "Em Andamento",
-        "key": "E"
-      },
-      "id": 2
-    },
-    {
-      "nome": "dddddddddd",
-      "descprojeto": "aaaaaaa",
-      "Status": {
-        "name": "Em Andamento",
-        "key": "E"
-      },
-      "id": 4
-    },
-    {
-      "nome": "ddddddddd",
-      "descprojeto": "aaaaaaaaa",
-      "Status": {
-        "name": "Finalizado",
-        "key": "F"
-      },
-      "id": 5
-    },
-    {
-      "nome": "ttttttttttt",
-      "descprojeto": "uiuuuuuuuuuuuu",
-      "Status": {
-        "name": "Finalizado",
-        "key": "F"
-      },
-      "id": 6
-    },
-    {
-      "nome": "daadadada",
-      "descprojeto": "daaaaaaaaaad",
-      "Status": {
-        "name": "Inativo",
-        "key": "I"
-      },
-      "id": 7
-    },
-    {
-      "nome": "dddddddd",
-      "descprojeto": "ddddddddddd",
-      "Status": {
-        "name": "Inativo",
-        "key": "I"
-      },
-      "id": 8
-    },
-    {
-      "nome": "criar criar",
-      "descprojeto": "isso",
-      "Status": {
-        "name": "Concluído",
+        "name": "Disponível",
         "key": "C"
       },
-      "id": 9
-    },
-    {
-      "nome": "dwadaw",
-      "descprojeto": "dawdwa",
-      "Status": {
-        "name": "Finalizado",
-        "key": "F"
-      },
-      "id": 10
+      "id": 4
     }
   ]
 }

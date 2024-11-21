@@ -35,6 +35,11 @@ import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withInterceptor
 
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+
+import { DragDropModule } from 'primeng/dragdrop';
+import { PickListModule } from 'primeng/picklist';
+
 
 
 @NgModule({
@@ -69,13 +74,16 @@ import { NgxSpinnerService } from 'ngx-spinner';
     MessagesModule,
     NgxSpinnerModule,
     TableModule,
+    DragDropModule,
+    PickListModule
   ],
   providers: [DialogService, ConfirmationService, MessageService, NgxSpinnerService, provideHttpClient(withInterceptorsFromDi()),
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }],
+    },
+    provideAnimationsAsync()],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

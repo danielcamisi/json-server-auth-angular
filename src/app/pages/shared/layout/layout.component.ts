@@ -90,7 +90,7 @@ export class LayoutComponent implements OnInit {
     this.spinner.show();
     setTimeout(()=>{               //exibição da tela de carregamento e tempo de duração:
       this.spinner.hide();
-    }, 3000)
+    }, 2000)
   }
   
   logout() {   

@@ -1,23 +1,33 @@
-<div class="div-main" *ngIf="projeto">
-  <div class="div-left">
-    <h3>Altere o nome do projeto:</h3>
-    <input pInputText type="text" [(ngModel)]="projeto.nome" placeholder="Nome do projeto" />
-    <h3>Altere a descrição do projeto:</h3>
-    <input pInputTextarea [(ngModel)]="projeto.descprojeto" placeholder="Descrição do Projeto">
+<div class="editor-container">
+  <table class="projetos-table">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Descrição</th>
+        <th>Status</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let projeto of projetoList">
+        <td>{{ projeto.nome }}</td>
+        <td>{{ projeto.descprojeto }}</td>
+        <td>{{ projeto.Status.name }}</td>
+        <td>
+          <button 
+            (click)="confirmDelete($event, projeto.id)" 
+            class="p-button p-button-danger"
+            pButton
+            icon="pi pi-trash"
+            label="Deletar"
+          ></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="button-group">
+    <button (click)="salvar()" class="p-button p-button-success">Salvar</button>
+    <button (click)="cancelar()" class="p-button p-button-secondary">Cancelar</button>
   </div>
-
-
-  <div class="div-right">
-    <h3>Altere o status do projeto:</h3>
-    <div *ngFor="let stats of statusOptions" class="field-checkbox">
-      <p-radioButton [inputId]="stats.key" name="stats" [value]="stats" [(ngModel)]="projeto.Status"/>
-      <label [for]="stats.key">{{ stats.name }}</label>
-    </div>
-  </div>
-  </div>
-
-
-  <div class="div-without">
-    <p-button (click)="salvar()">Salvar</p-button>
-    <p-button (click)="cancelar()">Cancelar</p-button>
-  </div>
+  <p-confirmPopup></p-confirmPopup>
+</div>
