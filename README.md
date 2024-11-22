@@ -42,10 +42,6 @@ Execute `ng build` para compilar o projeto. Os artefatos de compilação serão 
 
 Rode  `ng test` para executar os testes unitários via [Karma](https://karma-runner.github.io).
 
-## Rodando testes end-to-end
-
-Execute `ng e2e` para executar os testes de ponta a ponta através de uma plataforma de sua escolha. Para usar este comando, você precisa primeiro adicionar um pacote que implemente capacidades de teste de ponta a ponta.
-
 ## Ajuda
 
 Para visualizar mais informações de como utilizar o Angular, digite  `ng help` no terminal, ou confira a página do [Angular CLI Overview and Command Reference](https://angular.io/cli).
