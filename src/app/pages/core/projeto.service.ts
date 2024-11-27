@@ -10,7 +10,7 @@ import { map, switchMap  } from 'rxjs/operators';
 })
 export class ProjetoService {
 
-  private apiUrl = 'http://localhost:3000/projetos';
+  private apiUrl = 'http://localhost:3001/projetos';
 
   constructor(private http: HttpClient) { }
 
@@ -22,14 +22,8 @@ export class ProjetoService {
   // Método POST para criar um novo projeto, e mantendo a sequência de ID's
 
   addProjeto(projeto: Omit<Projeto, 'id'>): Observable<Projeto> {
-    return this.getProjetos().pipe(
-      map(projetos => {
-        const maxId = projetos.length > 0 ? Math.max(...projetos.map(p => p.id)) : 0;
-        const novoProjeto: Projeto = { ...projeto, id: maxId + 1 };
-        return novoProjeto;
-      }),
-      switchMap(novoProjeto => this.http.post<Projeto>(this.apiUrl, novoProjeto))
-    );
+    // Envie o projeto sem ID, permitindo que o servidor/banco de dados crie o ID
+    return this.http.post<Projeto>(this.apiUrl, projeto);
   }
   // Método DELETE para remover um projeto pelo ID
   deleteProjeto(id: number): Observable<void> {
