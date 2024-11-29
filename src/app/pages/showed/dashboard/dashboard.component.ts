@@ -82,12 +82,7 @@ export class DashboardComponent implements OnInit {
     const novoProjeto: Projeto = {
       nome: this.nomeProjeto,
       descprojeto: this.descProjeto,
-      status_name: this.statusSelecionado.name,
-      status_key: this.statusSelecionado.key,
-      Status: {
-        name: '',
-        key: ''
-      }
+      status: this.statusSelecionado.name
     };
   
     console.log('Novo Projeto:', novoProjeto);

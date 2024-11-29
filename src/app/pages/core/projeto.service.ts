@@ -16,7 +16,7 @@ export class ProjetoService {
 
   // Método GET para obter todos os projetos
   getProjetos(): Observable<Projeto[]> {
-    return this.http.get<Projeto[]>(this.apiUrl);
+    return this.http.get<Projeto[]>(`${this.apiUrl}`);
   }
 
   // Método POST para criar um novo projeto, e mantendo a sequência de ID's

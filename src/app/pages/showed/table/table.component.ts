@@ -53,45 +53,42 @@ export class TableComponent implements OnInit {
 
   carregarProjetos() {
     this.projetoService.getProjetos().subscribe((projetos: Projeto[]) => {
-      this.sourceProducts = projetos.filter(projeto => projeto.Status.key === 'C'); // Disponível
-      this.projetoProc = projetos.filter(projeto => projeto.Status.key === 'E'); // Em Processo
-      this.targetProducts = projetos.filter(projeto => projeto.Status.key === 'F'); // Concluído
+      this.sourceProducts = projetos.filter(projeto => projeto.status === 'Disponível');
+      this.projetoProc = projetos.filter(projeto => projeto.status === 'Em processo');
+      this.targetProducts = projetos.filter(projeto => projeto.status === 'Concluído');
     });
   }
 
   onMoveToTarget(event: any, target: string) {
     event.items.forEach((item: Projeto) => {
       if (target === 'process') {
-        item.Status = { name: 'Em Processo', key: 'E' };
+        item.status = 'Em processo';
         this.projetoProc.push(item);
+        this.sourceProducts = this.sourceProducts.filter(projeto => projeto.id !== item.id);
       } else if (target === 'finalized') {
-        item.Status = { name: 'Concluído', key: 'F' };
+        item.status = 'Concluído';
         this.targetProducts.push(item);
+        this.projetoProc = this.projetoProc.filter(projeto => projeto.id !== item.id);
       }
       this.updateProjetoStatus(item);
     });
-
-    this.carregarProjetos();
   }
   
   onMoveToSource(event: any, source: string) {
     event.items.forEach((item: Projeto) => {
       if (source === 'available') {
-        item.Status = { name: 'Disponível', key: 'C' }; // Corrija o key para 'C'
+        item.status = 'Disponível';
         this.sourceProducts.push(item);
         this.projetoProc = this.projetoProc.filter(projeto => projeto.id !== item.id);
         this.targetProducts = this.targetProducts.filter(projeto => projeto.id !== item.id);
       } else if (source === 'process') {
-        item.Status = { name: 'Em Processo', key: 'E' };
+        item.status = 'Em processo';
         this.projetoProc.push(item);
         this.targetProducts = this.targetProducts.filter(projeto => projeto.id !== item.id);
       }
       this.updateProjetoStatus(item);
     });
-  
-    this.carregarProjetos(); // Recarregar para garantir atualização visual
   }
-
   updateProjetoStatus(projeto: Projeto) {
     this.projetoService.updateProjeto(projeto).subscribe(
       () => {
