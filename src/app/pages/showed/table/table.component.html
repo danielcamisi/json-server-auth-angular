@@ -1,0 +1,78 @@
+<div class="all-in-the-list">
+  <div class="view-projects" [@fadeInOut]>
+    <div class="table-inside" *ngIf="projetos$ | async as projetos">
+      
+      <!-- Disponíveis para Em Processo -->
+      <h2>Projetos Disponíveis para Em Processo</h2>
+      <p-pickList 
+        [source]="sourceProducts" 
+        [target]="projetoProc"
+        sourceHeader="Disponíveis" 
+        targetHeader="Em Processo"
+        [dragdrop]="true" 
+        [responsive]="true"
+        [style]="{ width: '1000px' }"
+        [sourceStyle]="{ height: '15rem' }"
+        [targetStyle]="{ height: '15rem' }"
+        (onMoveToTarget)="onMoveToTarget($event, 'process')"
+        (onMoveToSource)="onMoveToSource($event, 'available')"
+        breakpoint="1400px">
+        
+        <ng-template let-projeto pTemplate="item">
+          <div (contextmenu)="onRightClick($event, projeto)" class="flex flex-wrap p-2 align-items-center gap-3">
+            <div (contextmenu)="onRightClick($event, projeto)" class="flex-1 flex flex-column gap-2">
+              <span class="font-bold">{{ projeto.nome }}</span>
+              <div (contextmenu)="onRightClick($event, projeto)" class="flex align-items-center gap-2">
+                <i class="pi pi-info-circle text-sm"></i>
+                <span>{{ projeto.descprojeto }}</span>
+              </div>
+              <div (contextmenu)="onRightClick($event, projeto)" class="flex align-items-center gap-2">
+                <i class="pi pi-tag text-sm"></i>
+                <span>{{ projeto.status }}</span>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </p-pickList>
+
+      <!-- Em Processo para Finalizado -->
+      <h2>Projetos Em Processo para Finalizado</h2>
+      <p-pickList 
+        [source]="projetoProc" 
+        [target]="targetProducts"
+        sourceHeader="Em Processo" 
+        targetHeader="Finalizados"
+        [dragdrop]="true" 
+        [responsive]="true" 
+        [style]="{ width: '1000px' }"
+        [sourceStyle]="{ height: '15rem' }"
+        [targetStyle]="{ height: '15rem' }"
+        (onMoveToTarget)="onMoveToTarget($event, 'finalized')"
+        (onMoveToSource)="onMoveToSource($event, 'process')"
+        breakpoint="1400px">
+        
+        <ng-template let-projeto pTemplate="item">
+          <div (contextmenu)="onRightClick($event, projeto)" class="flex flex-wrap p-2 align-items-center gap-3">
+            <div (contextmenu)="onRightClick($event, projeto)" class="flex-1 flex flex-column gap-2">
+              <span class="font-bold">{{ projeto.nome }}</span>
+              <div (contextmenu)="onRightClick($event, projeto)" class="flex align-items-center gap-2">
+                <i class="pi pi-info-circle text-sm"></i>
+                <span>{{ projeto.descprojeto }}</span>
+              </div>
+              <div (contextmenu)="onRightClick($event, projeto)" class="flex align-items-center gap-2">
+                <i class="pi pi-tag text-sm"></i>
+                <span>{{ projeto.status }}</span>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </p-pickList>
+
+      <!-- Botão Editar Projeto -->
+      <div class="button-container">
+        <button (click)="editProjeto()" class="p-button p-button-primary">Editar Projeto</button>
+        <button (click)="publish()" class="p-button p-button-primary">Publique para o time</button>
+      </div>
+    </div>
+  </div>
+</div>

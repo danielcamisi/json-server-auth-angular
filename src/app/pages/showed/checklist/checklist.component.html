@@ -1,0 +1,11 @@
+<div *ngFor="let subtarefa of subtarefas; let i = index">
+    <h4>{{ subtarefa.titulo }}</h4>
+    <p-radioButton [(ngModel)]="subtarefa.concluida" inputId="check{{i}}" value="true"(ngModelChange)="checkAllCompleted()"></p-radioButton>
+  </div>
+  
+  <p-button 
+    (click)="finalizarProjeto()" 
+    [disabled]="!isAllCompleted"
+  >
+    Finalizar
+  </p-button>

@@ -1,0 +1,72 @@
+.editor-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+  }
+  
+  .projetos-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .projetos-table th, .projetos-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .projetos-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+  
+  .projetos-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .projetos-table tr:hover {
+    background-color: #ddd;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  
+  .p-button {
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 4px;
+  }
+  
+  .p-button-danger {
+    background-color: #dc3545;
+    border: none;
+    color: white;
+  }
+  
+  .p-button-danger:hover {
+    background-color: #c82333;
+  }
+  
+  .p-button-success {
+    background-color: #28a745;
+    border: none;
+    color: white;
+  }
+  
+  .p-button-success:hover {
+    background-color: #218838;
+  }
+  
+  .p-button-secondary {
+    background-color: #6c757d;
+    border: none;
+    color: white;
+  }
+  
+  .p-button-secondary:hover {
+    background-color: #5a6268;
+  }

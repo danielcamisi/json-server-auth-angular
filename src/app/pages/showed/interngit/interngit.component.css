@@ -1,0 +1,29 @@
+.task-container {
+    margin: 20px;
+    width: 800px;
+    max-width: 90vw;
+    height: 350px;
+  }
+  
+  .task-inputs {
+    display: flex;
+    align-items: center; /* Alinha verticalmente os elementos */
+    gap: 10px; /* Espaçamento entre os elementos */
+  }
+  
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinha o título e o input juntos */
+  }
+  
+  h4 {
+    margin: 0;
+    margin-bottom: 5px; /* Espaçamento entre o título e o input */
+  }
+
+  .publish-button{
+    display: flex;
+    justify-content: center;
+    padding: 4em;
+  }

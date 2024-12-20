@@ -1,0 +1,17 @@
+.card{
+    display: flex;
+    flex-direction: column;
+    max-width: min-content;
+    margin:auto;
+}
+.main-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.input{
+    display: flex;
+    padding:1em;
+    flex-direction: column;
+}

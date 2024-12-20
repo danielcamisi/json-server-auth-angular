@@ -1,0 +1,33 @@
+<div class="editor-container">
+  <table class="projetos-table">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Descrição</th>
+        <th>Status</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let projeto of projetoList">
+        <td>{{ projeto.nome }}</td>
+        <td>{{ projeto.descprojeto }}</td>
+        <td>{{ projeto.status }}</td>
+        <td>
+          <button 
+            (click)="confirmDelete($event, projeto.id)" 
+            class="p-button p-button-danger"
+            pButton
+            icon="pi pi-trash"
+            label="Deletar"
+          ></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="button-group">
+    <button (click)="salvar()" class="p-button p-button-success">Salvar</button>
+    <button (click)="cancelar()" class="p-button p-button-secondary">Cancelar</button>
+  </div>
+  <p-confirmPopup></p-confirmPopup>
+</div>

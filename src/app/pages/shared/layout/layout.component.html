@@ -1,0 +1,39 @@
+<div class="layout-container">
+  <p-menubar [model]="itens">
+    <ng-template pTemplate="start">
+      <img src="../../../../assets/imgs/logoRapidev.jpg" style="height: 40px; margin-right: 40px;" alt="brand logo"/>
+    </ng-template>
+    <ng-template pTemplate="end">
+      <p-button label="Sair" (click)="confirmLogout($event)"></p-button>
+    </ng-template>
+  </p-menubar>
+
+  <p-confirmPopup></p-confirmPopup>
+  <p-messages></p-messages>
+  <p-dialog header="Lembrete Diário" [(visible)]="displayReminder" modal="modal" [closable]="true" [style]="{'width': '400px'}">
+    <div [innerHTML]="dailyReminderMessage"></div>
+    <p-footer>
+      <button pButton type="button" label="Fechar" icon="pi pi-check" (click)="displayReminder = false"></button>
+    </p-footer>
+  </p-dialog>
+  
+  <main class="main-div">
+    <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="cube-transition" [fullScreen]="true">
+      <p style="color: white">Carregando...</p>
+    </ngx-spinner>
+    <router-outlet></router-outlet>
+  </main>
+
+  <p-menubar [model]="links"  class="footer">
+    <p>Copyright <a href="https://github.com/danielcamisi">Daniel C. Silva</a></p>
+    <a href="https://github.com/danielcamisi">
+      <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" style="height: 36px; margin-right: 36px;" alt="brand logo">
+    </a>
+    <a href="https://x.com/danzzvlr">
+      <img src="https://img.freepik.com/vetores-premium/novo-vetor-do-logotipo-do-twitter-x_768467-92.jpg" style="height: 36px; margin-right: 36px;" alt="brand logo">
+    </a>
+    <a href="https://www.linkedin.com/in/daniel-silva-647860188/">
+      <img src="https://cdn-icons-png.flaticon.com/512/61/61109.png" style="height: 36px; margin-right: 36px;" alt="brand logo">
+    </a>
+  </p-menubar>
+</div>

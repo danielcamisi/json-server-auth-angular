@@ -1,0 +1,43 @@
+<div class="agenda-container">
+    
+    <form (ngSubmit)="agendarAtividade()" class="form-agendamento">
+        <h2>Agendar Nova Atividade</h2>
+      <div>
+        <label for="titulo">Título</label>
+        <input type="text" id="titulo" [(ngModel)]="novaAtividade.titulo" name="titulo" required>
+      </div>
+      <div>
+        <label for="data">Data</label>
+        <input type="date" id="data" [(ngModel)]="novaAtividade.data" name="data" required>
+      </div>
+      <div>
+        <label for="hora">Hora</label>
+        <input type="time" id="hora" [(ngModel)]="novaAtividade.hora" name="hora" required>
+      </div>
+      <button type="submit">Agendar</button>
+    </form>
+  <p-card>
+    <h2>Atividades Agendadas</h2>
+    <div class="atividades-agendadas">
+      <table>
+        <thead>
+          <tr>
+            <th>Título</th>
+            <th>Data</th>
+            <th>Hora</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let atividade of atividades">
+            <td>{{ atividade.titulo }}</td>
+            <td>{{ atividade.data }}</td>
+            <td>{{ atividade.hora }}</td>
+            <td><button (click)="excluirAtividade(atividade.id)">Excluir</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <p *ngIf="atividades.length === 0">Nenhuma atividade está agendada.</p>
+    </div>
+</p-card>
+  </div>

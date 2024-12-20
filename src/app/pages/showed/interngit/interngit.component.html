@@ -1,0 +1,37 @@
+<div class="task-container">
+    <h1>Descreva as tarefas atualizadas hoje e seus respectivos status</h1>
+    <div class="task-inputs">
+        <div class="input-group">
+            <h4>Tarefa</h4>
+            <p-autoComplete
+                [(ngModel)]="selectedTarefa" 
+                [suggestions]="filteredTarefas"
+                (completeMethod)="filterTarefas($event)"
+                field="nome"
+                [dropdown]="true"
+                placeholder="Selecione uma tarefa">
+            </p-autoComplete>
+        </div>
+        <div class="input-group">
+            <h4>Descrição</h4>
+            <input pInputTextarea [(ngModel)]="descricao" placeholder="Descreva a tarefa" />
+        </div>
+        <div class="input-group">
+            <h4>Pendências</h4>
+            <input pInputTextarea [(ngModel)]="pending" placeholder="Descreva as pendências" />
+        </div>
+        <div class="input-group">
+            <h4>Status</h4>
+            <p-dropdown 
+                [options]="stats" 
+                [(ngModel)]="selectedStatus" 
+                optionLabel="name" 
+                placeholder="Selecione um status">
+            </p-dropdown>
+        </div>
+       
+    </div>
+    <div class="publish-button">
+    <p-button (click)="publish()">Publicar</p-button>
+</div>
+</div>

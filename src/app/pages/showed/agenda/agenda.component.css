@@ -1,0 +1,67 @@
+.agenda-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    max-width: 800px;
+    width: 100%;
+  }
+  
+  .form-agendamento {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .form-agendamento div {
+    margin-bottom: 15px;
+  }
+  
+  .form-agendamento label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .form-agendamento input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .atividades-agendadas {
+    width: 100%;
+  }
+  
+  .atividades-agendadas table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .atividades-agendadas th, .atividades-agendadas td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .atividades-agendadas th {
+    background-color: #f2f2f2;
+  }
+  
+  button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
